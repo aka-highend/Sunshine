@@ -1,2 +1,2 @@
 # Sunshine
-A weather app which displays weather forecast from current location. Retrieve the data from openweathermap. Developed for Udacity's Advanced Android Development.
+A weather app which displays weather forecast from current location. Retrieve the data from openweathermap.org, developed for Udacity's Advanced Android Development.
