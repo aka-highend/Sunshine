@@ -55,8 +55,7 @@ public class ForecastAdapter extends CursorAdapter {
      */
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
-        // our view is pretty simple here --- just a text view
-        // we'll keep the UI functional with a simple (and slow!) binding.
+        // UI simplification with binding
         ViewHolder vh = (ViewHolder)view.getTag();
         TextView dateTv = vh.dateView;
         TextView forecastTv = vh.descriptionView;

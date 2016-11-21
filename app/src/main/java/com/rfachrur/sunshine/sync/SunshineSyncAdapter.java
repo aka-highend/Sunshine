@@ -155,19 +155,12 @@ public class SunshineSyncAdapter extends AbstractThreadedSyncAdapter {
     }
 
     private static void onAccountCreated(Account newAccount, Context context) {
-        /*
-         * Since we've created an account
-         */
+
         SunshineSyncAdapter.configurePeriodicSync(context, SYNC_INTERVAL, SYNC_FLEXTIME);
 
-        /*
-         * Without calling setSyncAutomatically, our periodic sync will not be enabled.
-         */
+        // Without calling setSyncAutomatically, our periodic sync will not be enabled.
         ContentResolver.setSyncAutomatically(newAccount, context.getString(R.string.content_authority), true);
 
-        /*
-         * Finally, let's do a sync to get things started
-         */
         syncImmediately(context);
     }
 
@@ -482,7 +475,6 @@ public class SunshineSyncAdapter extends AbstractThreadedSyncAdapter {
                 notifyWeather();
             }
 
-            // Students: Uncomment the next lines to display what what you stored in the bulkInsert
             Log.d(LOG_TAG, "Fetching Weather Service Complete. " + cVVector.size() + " Inserted");
 
             setSyncResult(context, LOCATION_STATUS_OK);

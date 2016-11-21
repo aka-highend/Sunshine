@@ -16,7 +16,9 @@ import java.util.Date;
 
 public class Utility {
 
+    // API KEY
     public static final String MY_APP_ID = "77561716931626fb25507ccc571a9a62";
+
     // Format used for storing dates in the database.  ALso used for converting those strings
     // back into date objects for comparison/processing.
     public static final String DATE_FORMAT = "yyyyMMdd";
@@ -80,7 +82,7 @@ public class Utility {
      */
     public static String getFriendlyDayString(Context context, long dateInMillis) {
         // The day string for forecast uses the following logic:
-        // For today: "Today, June 8"
+        // For today: "Today, Nov 19"
         // For tomorrow:  "Tomorrow"
         // For the next 5 days: "Wednesday" (just the day name)
         // For all days after that: "Mon Jun 8"
@@ -92,7 +94,7 @@ public class Utility {
         int currentJulianDay = Time.getJulianDay(currentTime, time.gmtoff);
 
         // If the date we're building the String for is today's date, the format
-        // is "Today, June 24"
+        // is "Today, Nov 19"
         if (julianDay == currentJulianDay) {
             String today = context.getString(R.string.today);
             int formatId = R.string.format_full_friendly_date;

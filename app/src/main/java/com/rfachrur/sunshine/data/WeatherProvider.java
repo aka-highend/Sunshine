@@ -95,13 +95,6 @@ public class WeatherProvider extends ContentProvider {
         );
     }
 
-
-    /*
-        Students: Here is where you need to create the UriMatcher. This UriMatcher will
-        match each URI to the WEATHER, WEATHER_WITH_LOCATION, WEATHER_WITH_LOCATION_AND_DATE,
-        and LOCATION integer constants defined above.  You can test this by uncommenting the
-        testUriMatcher test within TestUriMatcher.
-     */
     static UriMatcher buildUriMatcher() {
         // 1) The code passed into the constructor represents the code to return for the root
         // URI.  It's common to use NO_MATCH as the code for this case. Add the constructor below.
@@ -119,21 +112,13 @@ public class WeatherProvider extends ContentProvider {
         return uriMatcher;
     }
 
-    /*
-        Students: We've coded this for you.  We just create a new WeatherDbHelper for later use
-        here.
-     */
     @Override
     public boolean onCreate() {
         mOpenHelper = new WeatherDbHelper(getContext());
         return true;
     }
 
-    /*
-        Students: Here's where you'll code the getType function that uses the UriMatcher.  You can
-        test this by uncommenting testGetType in TestProvider.
 
-     */
     @Override
     public String getType(Uri uri) {
 
@@ -203,9 +188,6 @@ public class WeatherProvider extends ContentProvider {
         return retCursor;
     }
 
-    /*
-        Student: Add the ability to insert Locations to the implementation of this function.
-     */
     @Override
     public Uri insert(Uri uri, ContentValues values) {
         final SQLiteDatabase db = mOpenHelper.getWritableDatabase();
@@ -239,11 +221,9 @@ public class WeatherProvider extends ContentProvider {
 
     @Override
     public int delete(Uri uri, String selection, String[] selectionArgs) {
-        // Student: Start by getting a writable database
+
         final SQLiteDatabase db = mOpenHelper.getWritableDatabase();
 
-        // Student: Use the uriMatcher to match the WEATHER and LOCATION URI's we are going to
-        // handle.  If it doesn't match these, throw an UnsupportedOperationException.
         final int match = sUriMatcher.match(uri);
         if (selection == null) selection = "1";
         int rowDeleted = 0;
@@ -261,14 +241,10 @@ public class WeatherProvider extends ContentProvider {
             default: new UnsupportedOperationException("Unknown uri: " + uri);
         }
 
-        // Student: A null value deletes all rows.  In my implementation of this, I only notified
-        // the uri listeners (using the content resolver) if the rowsDeleted != 0 or the selection
-        // is null.
-        // Oh, and you should notify the listeners here.
         if (rowDeleted != 0){
             getContext().getContentResolver().notifyChange(uri, null);
         }
-        // Student: return the actual rows deleted
+
         return rowDeleted;
     }
 
@@ -283,8 +259,7 @@ public class WeatherProvider extends ContentProvider {
     @Override
     public int update(
             Uri uri, ContentValues values, String selection, String[] selectionArgs) {
-        // Student: This is a lot like the delete function.  We return the number of rows impacted
-        // by the update.
+
         final SQLiteDatabase db = mOpenHelper.getWritableDatabase();
         final int match = sUriMatcher.match(uri);
         int updatedRow = 0;
@@ -331,9 +306,7 @@ public class WeatherProvider extends ContentProvider {
         }
     }
 
-    // You do not need to call this method. This is a method specifically to assist the testing
-    // framework in running smoothly. You can read more at:
-    // http://developer.android.com/reference/android/content/ContentProvider.html#shutdown()
+    // To assist testing method to run smoothly
     @Override
     @TargetApi(11)
     public void shutdown() {
