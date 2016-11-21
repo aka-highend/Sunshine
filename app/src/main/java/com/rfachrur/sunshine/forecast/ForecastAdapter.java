@@ -1,4 +1,4 @@
-package com.rfachrur.sunshine;
+package com.rfachrur.sunshine.forecast;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -8,6 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.rfachrur.sunshine.R;
+import com.rfachrur.sunshine.Utility;
 
 
 public class ForecastAdapter extends CursorAdapter {

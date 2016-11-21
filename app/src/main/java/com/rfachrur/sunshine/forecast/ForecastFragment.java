@@ -1,4 +1,4 @@
-package com.rfachrur.sunshine;
+package com.rfachrur.sunshine.forecast;
 
 import android.app.Activity;
 import android.content.Context;
@@ -23,6 +23,8 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.rfachrur.sunshine.R;
+import com.rfachrur.sunshine.Utility;
 import com.rfachrur.sunshine.data.WeatherContract;
 import com.rfachrur.sunshine.sync.SunshineSyncAdapter;
 

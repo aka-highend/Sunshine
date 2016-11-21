@@ -153,8 +153,10 @@ public class Utility {
         time.setToNow();
         SimpleDateFormat dbDateFormat = new SimpleDateFormat(Utility.DATE_FORMAT);
         SimpleDateFormat monthDayFormat = new SimpleDateFormat("MMMM dd");
-        String monthDayString = monthDayFormat.format(dateInMillis);
-        return monthDayString;
+//        String monthDayString = monthDayFormat.format(dateInMillis);
+//        return monthDayString;
+
+        return monthDayFormat.format(dateInMillis);
     }
 
     public static String getFormattedWind(Context context, float windSpeed, float degrees) {

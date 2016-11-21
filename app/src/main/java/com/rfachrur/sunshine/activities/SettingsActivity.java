@@ -1,4 +1,4 @@
-package com.rfachrur.sunshine;
+package com.rfachrur.sunshine.activities;
 
 import android.annotation.TargetApi;
 import android.content.Intent;
@@ -11,6 +11,8 @@ import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 
+import com.rfachrur.sunshine.R;
+import com.rfachrur.sunshine.Utility;
 import com.rfachrur.sunshine.sync.SunshineSyncAdapter;
 
 

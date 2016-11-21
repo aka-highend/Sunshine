@@ -6,5 +6,5 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:layout="@layout/fragment_detail"
-    tools:context="com.rfachrur.sunshine.DetailActivity"
+    tools:context="com.rfachrur.sunshine.activities.DetailActivity"
     tools:ignore="MergeRootFrame"/>

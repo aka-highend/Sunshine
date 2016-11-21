@@ -9,6 +9,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.rfachrur.sunshine.activities.DetailActivity;
+import com.rfachrur.sunshine.activities.SettingsActivity;
+import com.rfachrur.sunshine.forecast.ForecastFragment;
 import com.rfachrur.sunshine.sync.SunshineSyncAdapter;
 
 public class MainActivity extends AppCompatActivity implements ForecastFragment.Callback {
