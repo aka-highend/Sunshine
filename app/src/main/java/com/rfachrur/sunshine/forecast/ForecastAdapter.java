@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.rfachrur.sunshine.R;
-import com.rfachrur.sunshine.Utility;
+import com.rfachrur.sunshine.util.Utility;
 
 
 public class ForecastAdapter extends CursorAdapter {

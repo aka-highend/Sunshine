@@ -13,6 +13,7 @@ import com.rfachrur.sunshine.activities.DetailActivity;
 import com.rfachrur.sunshine.activities.SettingsActivity;
 import com.rfachrur.sunshine.forecast.ForecastFragment;
 import com.rfachrur.sunshine.sync.SunshineSyncAdapter;
+import com.rfachrur.sunshine.util.Utility;
 
 public class MainActivity extends AppCompatActivity implements ForecastFragment.Callback {
 

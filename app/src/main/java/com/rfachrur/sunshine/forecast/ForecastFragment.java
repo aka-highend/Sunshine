@@ -24,7 +24,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.rfachrur.sunshine.R;
-import com.rfachrur.sunshine.Utility;
+import com.rfachrur.sunshine.util.Utility;
 import com.rfachrur.sunshine.data.WeatherContract;
 import com.rfachrur.sunshine.sync.SunshineSyncAdapter;
 

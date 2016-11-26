@@ -27,7 +27,7 @@ import android.util.Log;
 
 import com.rfachrur.sunshine.MainActivity;
 import com.rfachrur.sunshine.R;
-import com.rfachrur.sunshine.Utility;
+import com.rfachrur.sunshine.util.Utility;
 import com.rfachrur.sunshine.data.WeatherContract;
 
 import org.json.JSONArray;

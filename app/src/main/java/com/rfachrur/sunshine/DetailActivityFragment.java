@@ -23,6 +23,7 @@ import android.widget.TextView;
 
 import com.rfachrur.sunshine.activities.DetailActivity;
 import com.rfachrur.sunshine.data.WeatherContract;
+import com.rfachrur.sunshine.util.Utility;
 
 
 public class DetailActivityFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {

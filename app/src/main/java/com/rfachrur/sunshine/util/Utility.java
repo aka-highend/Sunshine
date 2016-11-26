@@ -1,4 +1,4 @@
-package com.rfachrur.sunshine;
+package com.rfachrur.sunshine.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -7,6 +7,7 @@ import android.net.NetworkInfo;
 import android.preference.PreferenceManager;
 import android.text.format.Time;
 
+import com.rfachrur.sunshine.R;
 import com.rfachrur.sunshine.sync.SunshineSyncAdapter;
 
 import java.text.DateFormat;
@@ -67,7 +68,7 @@ public class Utility {
         return context.getString(R.string.format_temperature, temp);
     }
 
-    static String formatDate(long dateInMillis) {
+    public static String formatDate(long dateInMillis) {
         Date date = new Date(dateInMillis);
         return DateFormat.getDateInstance().format(date);
     }
