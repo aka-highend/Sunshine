@@ -13,13 +13,13 @@ import com.rfachrur.sunshine.R;
 import com.rfachrur.sunshine.util.Utility;
 
 
-public class ForecastAdapter extends CursorAdapter {
+class ForecastAdapter extends CursorAdapter {
 
     private static final int VIEW_TYPE_TODAY = 0;
     private static final int VIEW_TYPE_FUTURE = 1;
     private boolean useTodayLayout = true;
 
-    public ForecastAdapter(Context context, Cursor c, int flags) {
+    ForecastAdapter(Context context, Cursor c, int flags) {
         super(context, c, flags);
     }
 
@@ -96,18 +96,18 @@ public class ForecastAdapter extends CursorAdapter {
         return Utility.getFriendlyDayString(context, c.getLong(ForecastFragment.COL_WEATHER_DATE));
     }
 
-    public void setUseTodayLayout(boolean isUsed) {
+    void setUseTodayLayout(boolean isUsed) {
         useTodayLayout = isUsed;
     }
 
     private static class ViewHolder {
-        public final ImageView iconView;
-        public final TextView dateView;
-        public final TextView descriptionView;
-        public final TextView highTempView;
-        public final TextView lowTempView;
+        final ImageView iconView;
+        final TextView dateView;
+        final TextView descriptionView;
+        final TextView highTempView;
+        final TextView lowTempView;
 
-        public ViewHolder(View view) {
+        ViewHolder(View view) {
             iconView = (ImageView) view.findViewById(R.id.list_item_icon);
             dateView = (TextView) view.findViewById(R.id.list_item_date_textview);
             descriptionView = (TextView) view.findViewById(R.id.list_item_forecast_textview);

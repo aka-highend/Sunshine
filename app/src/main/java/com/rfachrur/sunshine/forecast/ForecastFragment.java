@@ -68,7 +68,6 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
     SharedPreferences mSharedPreference;
     Callback mCallback = null;
     private int mPosition;
-    private boolean mUseTodayLayout = false;
 
     public ForecastFragment() {
     }
@@ -225,7 +224,7 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
     }
 
     public void setUseTodayLayout(boolean newValue) {
-        mUseTodayLayout = newValue;
+        boolean mUseTodayLayout = newValue;
         if (mForecastAdapter != null) {
             mForecastAdapter.setUseTodayLayout(newValue);
         }

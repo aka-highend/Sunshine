@@ -48,7 +48,7 @@ import java.util.Vector;
 
 public class SunshineSyncAdapter extends AbstractThreadedSyncAdapter {
 
-    public static final String LOG_TAG = SunshineSyncAdapter.class.getSimpleName();
+    private static final String LOG_TAG = SunshineSyncAdapter.class.getSimpleName();
 
     /**
      * query result status
@@ -58,9 +58,9 @@ public class SunshineSyncAdapter extends AbstractThreadedSyncAdapter {
     public static final int LOCATION_STATUS_SERVER_INVALID = 2;
     public static final int LOCATION_STATUS_UNKNOWN = 3;
     public static final int LOCATION_STATUS_INVALID = 4;
-    static final int HOUR_PER_SYNC = 6;
-    static final int SYNC_INTERVAL = 3600 * HOUR_PER_SYNC;
-    static final int SYNC_FLEXTIME = SYNC_INTERVAL / 3;
+    private static final int HOUR_PER_SYNC = 6;
+    private static final int SYNC_INTERVAL = 3600 * HOUR_PER_SYNC;
+    private static final int SYNC_FLEXTIME = SYNC_INTERVAL / 3;
     private static final String[] NOTIFY_WEATHER_PROJECTION = new String[]{
             WeatherContract.WeatherEntry.COLUMN_WEATHER_ID,
             WeatherContract.WeatherEntry.COLUMN_MAX_TEMP,
@@ -74,18 +74,18 @@ public class SunshineSyncAdapter extends AbstractThreadedSyncAdapter {
     private static final int INDEX_SHORT_DESC = 3;
     private static final long DAY_IN_MILLIS = 1000 * 60 * 60 * 24;
     private static final int WEATHER_NOTIFICATION_ID = 3004;
-    ContentResolver mContentResolver;
-    public SunshineSyncAdapter(Context context, boolean autoInitialize) {
+    private ContentResolver mContentResolver;
+    SunshineSyncAdapter(Context context, boolean autoInitialize) {
         super(context, autoInitialize);
         mContentResolver = getContext().getContentResolver();
     }
 
-    static void setSyncResult(Context context, @LocationStatus int syncResult) {
+    private static void setSyncResult(Context context, @LocationStatus int syncResult) {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
-        sp.edit().putInt(context.getString(R.string.pref_sync_result), syncResult).commit();
+        sp.edit().putInt(context.getString(R.string.pref_sync_result), syncResult).apply();
     }
 
-    public static void configurePeriodicSync(Context context, int syncInterval, int flexTime) {
+    private static void configurePeriodicSync(Context context, int syncInterval, int flexTime) {
         Log.d(LOG_TAG, "setting up periodic sync every " + SYNC_INTERVAL + " seconds");
         Account account = getSyncAccount(context);
         String authority = context.getString(R.string.content_authority);
@@ -123,7 +123,7 @@ public class SunshineSyncAdapter extends AbstractThreadedSyncAdapter {
      * @param context The context used to access the account service
      * @return a fake account.
      */
-    public static Account getSyncAccount(Context context) {
+    private static Account getSyncAccount(Context context) {
         // Get an instance of the Android account manager
         AccountManager accountManager =
                 (AccountManager) context.getSystemService(Context.ACCOUNT_SERVICE);
@@ -224,7 +224,7 @@ public class SunshineSyncAdapter extends AbstractThreadedSyncAdapter {
 
             // Read the input stream into a String
             InputStream inputStream = urlConnection.getInputStream();
-            StringBuffer buffer = new StringBuffer();
+            StringBuilder buffer = new StringBuilder();
             if (inputStream == null) {
                 setSyncResult(context, LOCATION_STATUS_SERVER_INVALID);
                 // Nothing to do.
@@ -237,7 +237,7 @@ public class SunshineSyncAdapter extends AbstractThreadedSyncAdapter {
                 // Since it's JSON, adding a newline isn't necessary (it won't affect parsing)
                 // But it does make debugging a *lot* easier if you print out the completed
                 // buffer for debugging.
-                buffer.append(line + "\n");
+                buffer.append(line).append("\n");
             }
 
             if (buffer.length() == 0) {
@@ -253,7 +253,6 @@ public class SunshineSyncAdapter extends AbstractThreadedSyncAdapter {
             Log.e(LOG_TAG, "Error ", e);
             // If the code didn't successfully get the weather data, there's no point in attemping
             // to parse it.
-            return;
         } catch (JSONException e) {
             setSyncResult(context, LOCATION_STATUS_SERVER_INVALID);
             Log.e(LOG_TAG, e.getMessage(), e);
@@ -271,7 +270,6 @@ public class SunshineSyncAdapter extends AbstractThreadedSyncAdapter {
             }
         }
 
-        return;
     }
 
     /**
@@ -283,7 +281,7 @@ public class SunshineSyncAdapter extends AbstractThreadedSyncAdapter {
      * @param lon             the longitude of the city
      * @return the row ID of the added location.
      */
-    long addLocation(String locationSetting, String cityName, double lat, double lon) {
+    private long addLocation(String locationSetting, String cityName, double lat, double lon) {
 
         Cursor c = mContentResolver.query(WeatherContract.LocationEntry.CONTENT_URI,
                 new String[]{WeatherContract.LocationEntry._ID},
@@ -291,6 +289,7 @@ public class SunshineSyncAdapter extends AbstractThreadedSyncAdapter {
                 new String[]{locationSetting},
                 null);
 
+        assert c != null;
         if (c.moveToFirst()) {
             int columnIndex = c.getColumnIndex(WeatherContract.LocationEntry._ID);
             return c.getLong(columnIndex);
@@ -484,7 +483,6 @@ public class SunshineSyncAdapter extends AbstractThreadedSyncAdapter {
             Log.e(LOG_TAG, e.getMessage(), e);
             e.printStackTrace();
         }
-        return;
     }
 
     private void notifyWeather() {
@@ -507,6 +505,7 @@ public class SunshineSyncAdapter extends AbstractThreadedSyncAdapter {
                 Cursor cursor = context
                         .getContentResolver().query(weatherUri, NOTIFY_WEATHER_PROJECTION, null, null, null);
 
+                assert cursor != null;
                 if (cursor.moveToFirst()) {
                     int weatherId = cursor.getInt(INDEX_WEATHER_ID);
                     double high = cursor.getDouble(INDEX_MAX_TEMP);
@@ -545,7 +544,7 @@ public class SunshineSyncAdapter extends AbstractThreadedSyncAdapter {
                     //refreshing last sync
                     SharedPreferences.Editor editor = prefs.edit();
                     editor.putLong(lastNotificationKey, System.currentTimeMillis());
-                    editor.commit();
+                    editor.apply();
                 }
             }
         }
